@@ -13,7 +13,7 @@
             Mail Send Test
         </h1>
     </div>
-    <form class="form-horizontal" action="mail_send.php" method="post">
+    <form class="form-horizontal" action="mail_send_func.php" method="post">
         <div class="form-group">
             <label for="sender" class="control-label col-sm-2">
                 Sender Email
@@ -33,21 +33,21 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group hidden">
             <label for="receiver" class="control-label col-sm-2">
                 Receiver Email
             </label>
             <div class="col-sm-10">
-                <input type="text" name="receiver" id="receiver" class="form-control" placeholder="받는 분의 이메일 주소를 입력하세요.">
+                <input type="text" name="receiver" id="receiver" class="form-control" placeholder="받는 분의 이메일 주소를 입력하세요." value="junishop@gmail.com">
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group hidden">
             <label for="receiver" class="control-label col-sm-2">
                 Receiver Name
             </label>
             <div class="col-sm-10">
-                <input type="text" name="receiver_name" id="receiver" class="form-control" placeholder="받는 분의 이름을 입력하세요.">
+                <input type="text" name="receiver_name" id="receiver" class="form-control" placeholder="받는 분의 이름을 입력하세요." value="Perblisher-Juni">
             </div>
         </div>
 

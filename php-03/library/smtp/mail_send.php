@@ -4,6 +4,7 @@
 include_once ('../inc/helper.php');
 include_once ('../inc/PHPMailer/PHPMailerAutoload.php');
 
+
 $sender = post('sender',false);
 $sender_name = post('sender_name',false);
 $receiver = post('receiver',false);
@@ -28,6 +29,7 @@ if(!$content){
     redirect(false, '메일 내용을 입력하세요.');
 }
 
+//메일 발송 기능 초기화
 //메일 발송을 위한 Gmail 서버 연동정보 설정
 $mail = new PHPMailer();
 $mail->CharSet = "utf-8";

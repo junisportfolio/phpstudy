@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <? include_once '../inc/head.php'; ?>
+    <? include_once ('../inc/head.php'); ?>
     <!-- jQuery 플러그인 참조 -->
     <script src="http://cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 </head>

@@ -1,5 +1,6 @@
 <?
 
+/* Get Post */
 /**
  * HTTP GET 파라미터 값을 수신한다.
  * @param $key - 파라미터 이름
@@ -58,6 +59,8 @@ function post($key, $def)
     return $value;
 }
 
+
+/* Redirect */
 /**
  * 메시지를 화면에 표시한 후, 저정된 페이지로 강제 이동 시킨다.
  * @param $url - 이동할 페이지 경로. FALSE로 지정한 경우 이전 페이지로 이동
@@ -88,6 +91,49 @@ function redirect($url, $msg)
     echo($html);
     exit();
 }
+
+
+function send_mail($sender, $sender_name, $receiver, $receiver_name, $subject, $content)
+{
+    //리턴할 결과값
+    $is_mail_send_ok = FALSE;
+
+    $inc_dir = dirname(__FILE__);
+    include_once ($inc_dir.'/PHPMailer/PHPMailerAutoload.php');
+
+    //메일 발송 기능 초기화
+    //메일 발송을 위한 Gmail 서버 연동정보 설정
+    $mail = new PHPMailer();
+    $mail->CharSet = "utf-8";
+    $mail->Encoding = "base64";
+    $mail->isSMTP();
+    $mail->Host = "smtp.gmail.com";
+    $mail->SMTPAuth = "true";
+    $mail->Username = "junishop@gmail.com";
+    $mail->Password = "coke9049";
+    $mail->SMTPSecure = "ssl";
+    $mail->Port = "465";
+    $mail->isHTML(true);
+
+
+    //보내는 사람 정보 설정
+    $mail->Form = $sender;
+    $mail->FormName = $sender_name;
+    //받는 사람 정보 설정
+    $mail->addAddress($receiver, $receiver_name);
+
+    //제목과 내용
+    $mail->Subject = $subject;
+    $mail->Body = $content;
+
+    //발송 및 발송 결과 처리
+    $is_mail_send_ok = $mail->send();
+
+    return $is_mail_send_ok;
+}
+
+
+
 
 
 ?>
