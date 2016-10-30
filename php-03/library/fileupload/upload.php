@@ -11,10 +11,10 @@
             파일업로드
         </h1>
     </div>
-    <form action="single_upload_ok.php" method="post" enctype="multipart/form-data">
+    <form action="single_upload_func.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="myfile">파일선택</label>
-            <input type="file" name="myfile[]" id="myfile" class="form-control" multiple />
+            <input type="file" name="myfile" id="myfile" class="form-control" />
         </div>
         <div class="form-group">
             <label for="comment">파일설명</label>

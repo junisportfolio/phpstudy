@@ -132,7 +132,67 @@ function send_mail($sender, $sender_name, $receiver, $receiver_name, $subject, $
     return $is_mail_send_ok;
 }
 
+function single_upload($name, $type, $size, $tmp_name)
+{
+    $upload_data = FALSE;
 
+    if (!$name || $size < 1) {
+        return FALSE;
+    }
+
+//업로드 된 파일이 저장될 폴더의 경로를 지정하기
+//DocumentRoot 안에서의 저장폴더 경로를 구성한다
+    $upload_dir_uri = "/files/" . date('Ymd', time());
+//DocumentRoot의 실제 경로를 얻어와서 전체 경로를 구성한다
+    $upload_dir_path = $_SERVER['DOCUMENT_ROOT'] . $upload_dir_uri;
+
+//폴더가 없으면 만든다
+    if (!is_dir($upload_dir_path)) {
+        $dir_create = mkdir($upload_dir_path, 0777, true);
+
+        if (!$dir_create) {
+            die("폴더 생성 실패");
+        }
+    }
+
+//파일이 저장될 폴더 준비하기
+//업로드 된 파일을 복사하기 위한 파일이름 생성하기
+    $p = strrpos($name, '.');
+    $l = strlen($name);
+    $file_ext = strtolower(substr($name, $p, $l - $p));
+
+    $file_name = ''; // 복사될 파일이름
+    $upload_uri = ''; // 복사될 웹 상의 경로
+    $upload_path = ''; // 복사될 전체 경로
+
+//일단 무한루프
+    for ($i = 1; $i > 0; $i++) {
+        $file_name = time() . '_' . rand(1000, 9999) . $file_ext;
+        $upload_uri = $upload_dir_uri . '/' . $file_name;
+        $upload_path = $upload_dir_path . '/' . $file_name;
+
+        //같은 이름이 파일이 없다면 반복 종료
+        if (!is_file($upload_path)) {
+            break;
+        }
+    }
+
+
+//파일 복사하기
+    $is_copy = copy($tmp_name, $upload_path);
+    if ($is_copy) {
+        chmod($upload_path, 0777);
+        $upload_data = array(
+            'name' => $name,
+            'type' => $type,
+            'size' => $size,
+            'upload_path' => $upload_path,
+            'upload_uri' => $upload_uri
+        );
+    }
+    return $upload_data;
+
+}
 
 
 

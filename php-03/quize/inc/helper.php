@@ -88,6 +88,7 @@ function redirect($url, $msg)
     echo($html);
     exit();
 }
+
 function single_upload($name, $type, $size, $tmp_name)
 {
     $upload_data = FALSE;
